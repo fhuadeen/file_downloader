@@ -3,5 +3,7 @@ BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, BASE)
 print(BASE)
 
-test_youtube_link = 'https://www.youtube.com/watch?v=4TJhBhQk-TY'
-test_download_path = f'{BASE}/test'
+TEST_YOUTUBE_LINK = 'https://www.youtube.com/watch?v=4TJhBhQk-TY'
+TEST_FAKE_YOUTUBE_LINK = 'https://www.twitter'
+TEST_DOWNLOAD_PATH = f'{BASE}/tests'
+TEST_FAKE_DOWNLOAD_PATH = f'{BASE}/fake_test'
