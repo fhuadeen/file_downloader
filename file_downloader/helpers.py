@@ -12,9 +12,13 @@ def check_link(link: str)-> bool:
 
 def check_path(path: Path) -> bool:
     # check if link starts with youtube
-    if os.path.exists(path):
+    if os.path.isdir(path):
         return True
     return False
 
-def clean_up_download():
-    pass
+def clean_up_download(path: Path):
+    # check path exists
+    if os.path.exists(path):
+        os.remove(path)
+        return True
+    return False
