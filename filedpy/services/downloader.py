@@ -1,13 +1,15 @@
 import os, sys
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, BASE)
-from pytube import YouTube
-import helpers
 from pathlib import Path
-from typing import Dict
+
+from pytube import YouTube
+from pytube.exceptions import VideoUnavailable, RegexMatchError
+
+import filedpy.utils.helpers as helpers
 
 
-def youtube_download(link: str, download_path: str) -> Dict:
+def youtube_download(link: str, download_path: str) -> str:
     """
     For downloading a YouTube video.
 
@@ -23,15 +25,22 @@ def youtube_download(link: str, download_path: str) -> Dict:
 
     # check if link is https://www.youtube.com
     check_link = helpers.check_link(link)
+    print("Vetting link...")
     if not check_link:
         raise ValueError("Invalid Youtube URL")
 
     # check if download path exists
     check_download_path = helpers.check_path(Path(download_path))
+    print("Vetting download path...")
     if not check_download_path:
         raise ValueError("Invalid download path. Path must be a folder.")
     # try download
-    youtube_obj = YouTube(link)
+    try:
+        print("confirming link ID...")
+        youtube_obj = YouTube(link)
+    except RegexMatchError as e:
+        print("Link does not match any Youtube ID:", e)
+        return "Can't find video to download"
     youtube_object = youtube_obj.streams.get_highest_resolution()
 
     # check_vid_availability = youtube_object.check_availability()
@@ -39,15 +48,13 @@ def youtube_download(link: str, download_path: str) -> Dict:
     try:
         print("downloading...")
         youtube_object.download(output_path=download_path)
-    except Exception as e:
-        raise "An error occurred while downloading"
+    except VideoUnavailable as e:
+        print("Video unavailable:", e)
+        return "Video currently unavailable, please try again later."
 
-    return {
-        "success": True,
-        "message": "Downloaded successfully"
-    }
+    return "Downloaded successfully"
 
-# print(youtube_download(
-#     'https://www.youtube.com/watch?v=4TJhBhQk-TY',
-#     "/home/fhuad/Downloads/youtube_download"
-# ))
+print(youtube_download(
+    'https://www.youtube.com/watch?v=4TJhBhQk-TY',
+    "/home/fhuad/Downloads/youtube_download"
+))
