@@ -1,19 +1,20 @@
 [tool.poetry]
-name = "file-downloader"
+name = "filedpy"
 version = "0.1.0"
 description = ""
-authors = ["Fhuad Balogun <fhuadbalogun@gmail.com>"]
+authors = ["Fhuad Balogun <@fhuadeen>"]
 readme = "README.md"
 packages = [{include = "file_downloader"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
 pytube = "^12.1.2"
+mypy = "^0.991"
+typer = "^0.7.0"
 
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.2.0"
-mypy = "^0.991"
 
 [build-system]
 requires = ["poetry-core"]

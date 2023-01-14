@@ -1,4 +1,4 @@
-from file_downloader import helpers
+from filedpy.utils import helpers
 from .test_data import (
     TEST_YOUTUBE_LINK,
     TEST_FAKE_YOUTUBE_LINK,
