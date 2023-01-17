@@ -54,7 +54,7 @@ def youtube_download(link: str, download_path: str) -> str:
 
     return "Downloaded successfully"
 
-print(youtube_download(
-    'https://www.youtube.com/watch?v=4TJhBhQk-TY',
-    "/home/fhuad/Downloads/youtube_download"
-))
+# print(youtube_download(
+#     'https://www.youtube.com/watch?v=4TJhBhQk-TY',
+#     "/home/fhuad/Downloads/youtube_download"
+# ))
